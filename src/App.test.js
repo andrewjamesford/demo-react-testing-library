@@ -1,8 +1,31 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import { render, screen, fireEvent } from "@testing-library/react";
+import App from "./App";
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+describe("Counter tests", () => {
+  const setup = () => render(<App />);
+
+  test("Renders the react logo", () => {
+    setup();
+    // https://testing-library.com/docs/queries/byalttext
+    const logo = screen.getByAltText("React logo");
+    expect(logo).toBeInTheDocument();
+    expect(logo).toHaveAttribute("src", "logo.svg");
+  });
+
+  test("Renders h1 with count", () => {
+    setup();
+    // https://testing-library.com/docs/queries/bytext
+    const headingElement = screen.getByText(/count: 0/i);
+    expect(headingElement).toBeInTheDocument();
+  });
+
+  test("Renders counter buttons", () => {
+    setup();
+    // https://testing-library.com/docs/queries/byrole/
+    expect(screen.getByRole("button", { name: "+1" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "-1" })).toBeInTheDocument();
+  });
+
+
+  
 });
