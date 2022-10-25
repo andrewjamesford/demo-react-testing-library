@@ -15,6 +15,7 @@ describe("Counter tests", () => {
   test("Renders h1 with count", () => {
     setup();
     // https://testing-library.com/docs/queries/bytext
+    // const headingElement = screen.getByText("Count: 0");
     const headingElement = screen.getByText(/count: 0/i);
     expect(headingElement).toBeInTheDocument();
   });
@@ -26,6 +27,13 @@ describe("Counter tests", () => {
     expect(screen.getByRole("button", { name: "-1" })).toBeInTheDocument();
   });
 
+  test("Text changes on button pressed", () => {
+    setup();
+    const button = screen.getByRole("button", { name: "+1" });
 
-  
+    fireEvent.click(button);
+
+    const headingElement = screen.getByText(/count: 1/i);
+    expect(headingElement).toBeInTheDocument();
+  });
 });
