@@ -1,5 +1,6 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import App from "./App";
+import App from "./App.jsx";
+import logo from "./logo.svg";
 
 describe("Counter tests", () => {
   const setup = () => render(<App />);
@@ -7,9 +8,9 @@ describe("Counter tests", () => {
   test("Renders the react logo", () => {
     setup();
     // https://testing-library.com/docs/queries/byalttext
-    const logo = screen.getByAltText("React logo");
-    expect(logo).toBeInTheDocument();
-    expect(logo).toHaveAttribute("src", "logo.svg");
+    const logoImage = screen.getByAltText("React logo");
+    expect(logoImage).toBeInTheDocument();
+    expect(logoImage).toHaveAttribute("src", logo);
   });
 
   test("Renders h1 with count", () => {
